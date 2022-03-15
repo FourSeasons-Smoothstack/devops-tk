@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+  aline-underwriter:
+    image: underwriter-ms:0.1
+    restart: always
+    build:
+      context: ./microservices/underwriter
+    ports:
+      - 8071:8071
+
+  aline-transaction:
+    image: transaction-ms:0.1
+    restart: always
+    build:
+      context: ./microservices/transactions
+    ports:
+      - 8073:8073
+
+  aline-bank:
+    image: bank-ms:0.1
+    restart: always
+    build:
+      context: ./microservices/bank
+    ports:
+      - 8083:8083
+
+  aline-user:
+    image: user-ms:0.1
+    restart: always
+    build:
+      context: ./microservices/users
+    ports:
+      - 8070:8070
+
+networks:
+  default:
+      name: db-tk_default

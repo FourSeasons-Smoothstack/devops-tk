@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bank-ms-service
+spec:
+  ports:
+  - port: 8083
+    targetPort: 8083
+  selector:
+    app: bank-ms
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bank-ms
+spec:
+  selector:
+    matchLabels:
+      app: bank-ms
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: bank-ms
+    spec:
+      containers:
+      - name: bank-ms
+        image: thomaskubant/bank-ms:1.0
+        ports:
+        - containerPort: 8083
+          name: bank-ms
+        env:
+        - name: DB_USERNAME
+          value: root
+        - name: DB_PASSWORD
+          value: root
+        - name: DB_HOST
+          value: mysql-service
+        - name: DB_NAME
+          value: alinedb

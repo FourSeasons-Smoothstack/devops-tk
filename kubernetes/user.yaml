@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-ms-service
+spec:
+  ports:
+  - port: 8070
+    targetPort: 8070
+  selector:
+    app: user-ms
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-ms
+spec:
+  selector:
+    matchLabels:
+      app: user-ms
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: user-ms
+    spec:
+      containers:
+      - name: user-ms
+        image: thomaskubant/user-ms:1.0
+        ports:
+        - containerPort: 8070
+          name: user-ms
+        env:
+        - name: DB_USERNAME
+          value: root
+        - name: DB_PASSWORD
+          value: root
+        - name: DB_HOST
+          value: mysql-service
+        - name: DB_NAME
+          value: alinedb
+        
