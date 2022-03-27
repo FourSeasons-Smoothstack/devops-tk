@@ -1,35 +1,31 @@
 version: "3"
-
+x-aws-vpc: "vpc-0970367d29819a853"
 services:
   aline-underwriter:
-    image: underwriter-ms:0.1
-    restart: always
-    build:
-      context: ./microservices/underwriter
+    image: thomaskubant/underwriter-ms:1.2
+    env_file:
+      - .env
     ports:
       - 8071:8071
 
   aline-transaction:
-    image: transaction-ms:0.1
-    restart: always
-    build:
-      context: ./microservices/transactions
+    image: thomaskubant/transaction-ms:1.2
+    env_file:
+      - .env
     ports:
       - 8073:8073
 
   aline-bank:
-    image: bank-ms:0.1
-    restart: always
-    build:
-      context: ./microservices/bank
+    image: thomaskubant/bank-ms:1.2
+    env_file:
+      - .env
     ports:
       - 8083:8083
 
   aline-user:
-    image: user-ms:0.1
-    restart: always
-    build:
-      context: ./microservices/users
+    image: thomaskubant/user-ms:1.2
+    env_file:
+      - .env
     ports:
       - 8070:8070
 

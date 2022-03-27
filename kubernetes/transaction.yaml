@@ -32,11 +32,23 @@ spec:
         - containerPort: 8073
           name: transaction-ms
         env:
-        - name: DB_USERNAME
-          value: root
-        - name: DB_PASSWORD
-          value: root
-        - name: DB_HOST
-          value: mysql-service
-        - name: DB_NAME
-          value: alinedb
+          - name: DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: sql-secret
+                key: sql-user
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: sql-secret
+                key: sql-password
+          - name: DB_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: sql-config
+                key: db-host
+          - name: DB_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: sql-config
+                key: db-name
