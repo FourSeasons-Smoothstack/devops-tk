@@ -7,7 +7,6 @@ services:
       - .env
     ports:
       - 8071:8071
-
   aline-transaction:
     image: thomaskubant/transaction-ms:1.2
     env_file:
