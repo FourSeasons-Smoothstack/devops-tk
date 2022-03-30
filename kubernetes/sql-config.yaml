@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: sql-config
 data:
-  host: sql-service
-  name: alinedb
+  db-host: mysql-service
+  db-name: alinedb
