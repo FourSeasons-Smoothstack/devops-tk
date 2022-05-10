@@ -17,6 +17,7 @@ pipeline {
                     withAWS(credentials: 'AWS-TK', region:'us-west-1') {
                         dir("terraform"){
                             sh "terraform init"
+                            sh "terraform plan -var-file='secret.tfvars'"
                             sh "terraform apply -auto-approve -var-file='secret.tfvars'"
                         }
                     }
