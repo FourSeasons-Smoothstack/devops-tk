@@ -4,7 +4,7 @@ pipeline{
     stage('Pull Environment Variables') {
       steps{
         withAWS(credentials:"AWS-TK") {
-          sh 's3://fs-aline-tk/aline-env-tk/ ./aline-env-tk --recursive'
+          sh 'aws s3 cp s3://fs-aline-tk/aline-env-tk/ ./aline-env-tk --recursive'
         }
       }
     }
