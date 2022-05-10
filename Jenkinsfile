@@ -22,11 +22,11 @@ pipeline{
         }
       }
     }
-    post{
-      always{
-        withAWS(credentials: 'AWS-TK', region: 'us-west-1') {
-          sh 'docker context use default'
-        }
+  }
+  post{
+    always{
+      withAWS(credentials: 'AWS-TK', region: 'us-west-1') {
+        sh 'docker context use default'
       }
     }
   }
