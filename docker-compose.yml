@@ -3,28 +3,24 @@ x-aws-vpc: "vpc-0970367d29819a853"
 services:
   aline-underwriter:
     image: thomaskubant/underwriter-ms:1.2
-    env_file:
-      - .env
+    env_file: ./aline-env-tk/.env
     ports:
       - 8071:8071
   aline-transaction:
     image: thomaskubant/transaction-ms:1.2
-    env_file:
-      - .env
+    env_file: ./aline-env-tk/.env
     ports:
       - 8073:8073
 
   aline-bank:
     image: thomaskubant/bank-ms:1.2
-    env_file:
-      - .env
+    env_file: ./aline-env-tk/.env
     ports:
       - 8083:8083
 
   aline-user:
     image: thomaskubant/user-ms:1.2
-    env_file:
-      - .env
+    env_file: ./aline-env-tk/.env
     ports:
       - 8070:8070
 
