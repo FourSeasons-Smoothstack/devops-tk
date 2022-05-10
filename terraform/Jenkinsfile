@@ -2,13 +2,20 @@ pipeline {
     agent any
 
     stages {
+        stage('Pull Environment Variables') {
+      steps{
+        withAWS(credentials:"AWS-TK") {
+          sh 'aws s3 cp s3://fs-aline-tk/aline-env-tk/ ./aline-env-tk --recursive'
+        }
+      }
+    }
         stage("Terraform apply"){
             steps{
                 script{
                     withAWS(credentials: 'AWS-TK', region:'us-west-1') {
                         dir("terraform"){
                             sh "terraform init"
-                            sh "terraform apply -auto-approve"
+                            sh "terraform apply -auto-approve -var-file="./aline-env-tk/secrets.tfvars""
                         }
                     }
                 }
