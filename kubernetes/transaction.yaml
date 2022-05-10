@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: transaction-ms
-        image: thomaskubant/transaction-ms:1.0
+        image: thomaskubant/transaction-ms:1.2
         ports:
         - containerPort: 8073
           name: transaction-ms

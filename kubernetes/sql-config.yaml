@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: sql-config
 data:
-  db-host: mysql-service
-  db-name: alinedb
+  db-host: aline-financial.cybtxjysfxrf.us-east-1.rds.amazonaws.com
+  db-name: alinedb-tk

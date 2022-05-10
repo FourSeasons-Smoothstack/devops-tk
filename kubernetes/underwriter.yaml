@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: underwriter-ms
-        image: thomaskubant/underwriter-ms:1.0
+        image: thomaskubant/underwriter-ms:1.2
         ports:
         - containerPort: 8071
           name: underwriter-ms

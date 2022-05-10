@@ -1,1 +1,5 @@
 .env
+.terraform/
+secret.tfvars
+.tfstate
+terraform.tfstate.backup

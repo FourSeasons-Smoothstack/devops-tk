@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: user-ms
-        image: thomaskubant/user-ms:1.0
+        image: thomaskubant/user-ms:1.2
         ports:
         - containerPort: 8070
           name: user-ms
