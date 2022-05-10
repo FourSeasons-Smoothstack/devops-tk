@@ -28,7 +28,7 @@ pipeline {
         always{
             withAWS(credentials: 'AWS-TK', region:'us-west-1') {
                 dir("terraform"){
-                    sh 'terraform destroy -auto-approve'
+                    sh "terraform destroy -auto-approve -var-file='secret.tfvars'"
                 }
             }
         }
