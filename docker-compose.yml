@@ -1,5 +1,4 @@
 version: "3"
-x-aws-vpc: "vpc-0970367d29819a853"
 services:
   aline-underwriter:
     image: thomaskubant/underwriter-ms:1.2
