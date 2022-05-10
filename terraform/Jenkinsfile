@@ -1,1 +1,27 @@
+pipeline {
+    agent any
 
+    stages {
+        stage("Terraform apply"){
+            steps{
+                script{
+                    withAWS(credentials: 'AWS-TK', region:'us-west-1') {
+                        dir("terraform"){
+                            sh "terraform init"
+                            sh "terraform apply -auto-approve"
+                        }
+                    }
+                }
+            }
+        }
+    }
+    post{
+        always{
+            withAWS(credentials: 'AWS-TK', region:'us-west-1') {
+                dir("terraform"){
+                    sh 'terraform destroy -auto-approve'
+                }
+            }
+        }
+    }
+}
