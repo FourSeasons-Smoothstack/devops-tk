@@ -16,7 +16,7 @@ pipeline{
             withAWS(credentials: 'AWS-TK', region: 'us-west-1') {
               sh "aws ecr get-login-password --region us-west-1 | docker login --username AWS --password-stdin " + ID + ".dkr.ecr.us-west-1.amazonaws.com"
               sh "docker context use ecs-tk"
-              sh "docker compose up"
+              sh "docker compose --project-name ECS-TK up"
             }
           }
         }
@@ -27,6 +27,7 @@ pipeline{
     always{
       withAWS(credentials: 'AWS-TK', region: 'us-west-1') {
         sh 'docker context use default'
+        sh 'docker compose --project-name ECS-TK down'
       }
     }
   }
