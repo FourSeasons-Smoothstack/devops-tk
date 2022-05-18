@@ -1,32 +1,67 @@
 version: "3"
-x-aws-vpc: "vpc-0970367d29819a853"
 services:
   aline-underwriter:
-    image: thomaskubant/underwriter-ms:1.2
+    image: ${AWS_ACCOUNT_NUMBER}.dkr.ecr.us-east-1.amazonaws.com/aline-underwriter-tk:latest
     env_file:
       - .env
     ports:
-      - 8071:8071
+      - ${UNDERWRITER_PORT}:${UNDERWRITER_PORT}
+    deploy:
+      resources:
+        limits:
+          cpus: '.5'
+          memory: 2000M
+      x-aws-autoscaling:
+        min: 1
+        max: 5
+        cpu: 80
   aline-transaction:
-    image: thomaskubant/transaction-ms:1.2
+    image: ${AWS_ACCOUNT_NUMBER}.dkr.ecr.us-east-1.amazonaws.com/aline-transaction-tk:latest
     env_file:
       - .env
     ports:
-      - 8073:8073
+      - ${TRANSACTION_PORT}:${TRANSACTION_PORT}
+    deploy:
+      resources:
+        limits:
+          cpus: '.5'
+          memory: 2000M
+      x-aws-autoscaling:
+        min: 1
+        max: 5
+        cpu: 80
 
   aline-bank:
-    image: thomaskubant/bank-ms:1.2
+    image: ${AWS_ACCOUNT_NUMBER}.dkr.ecr.us-east-1.amazonaws.c om/aline-transaction-tk:latest
     env_file:
       - .env
     ports:
-      - 8083:8083
+      - ${BANK_PORT}:${BANK_PORT}
+    deploy:
+      resources:
+        limits:
+          cpus: '.5'
+          memory: 2000M
+      x-aws-autoscaling:
+        min: 1
+        max: 5
+        cpu: 80
 
   aline-user:
-    image: thomaskubant/user-ms:1.2
+    image: ${AWS_ACCOUNT_NUMBER}.dkr.ecr.us-east-1.amazonaws.com/aline-user-tk:latest
     env_file:
       - .env
     ports:
-      - 8070:8070
+      - ${USER_PORT}:${USER_PORT}
+    deploy:
+      resources:
+        limits:
+          cpus: '.5'
+          memory: 2000M
+      x-aws-autoscaling:
+        min: 1
+        max: 5
+        cpu: 80
 
 networks:
   default:
