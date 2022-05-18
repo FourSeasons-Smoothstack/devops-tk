@@ -1,0 +1,64 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /users/registration
+        pathType: Prefix
+        backend:
+          service:
+            name: user-ms-service
+            port: 
+              number: 8070
+      - path: /login
+        pathType: Prefix
+        backend:
+          service:
+            name: user-ms-service
+            port: 
+              number: 8070
+
+      - path: /applications
+        pathType: Prefix
+        backend:
+          service:
+            name: underwriter-ms-service
+            port: 
+              number: 8071
+      - path: /applicants
+        pathType: Prefix
+        backend:
+          service:
+            name: underwriter-ms-service
+            port: 
+              number: 8071
+
+      - path: /branches
+        pathType: Prefix
+        backend:
+          service:
+            name: bank-ms-service
+            port: 
+              number: 8083
+      - path: /banks
+        pathType: Prefix
+        backend:
+          service:
+            name: bank-ms-service
+            port: 
+              number: 8083
+
+      - path: /transactions
+        pathType: Prefix
+        backend:
+          service:
+            name: transaction-ms-service
+            port: 
+              number: 8073
