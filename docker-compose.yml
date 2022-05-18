@@ -32,7 +32,7 @@ services:
         cpu: 80
 
   aline-bank:
-    image: ${AWS_ACCOUNT_NUMBER}.dkr.ecr.us-east-1.amazonaws.c om/aline-transaction-tk:latest
+    image: ${AWS_ACCOUNT_NUMBER}.dkr.ecr.us-east-1.amazonaws.com/aline-bank-tk:latest
     env_file:
       - .env
     ports:
