@@ -20,5 +20,11 @@ pipeline{
             sh 'kubectl apply -f .'
         }
     }
+
+    stage('Log Deployments') {
+        dir('kubernetes') {
+            sh 'kubectl get deployments'
+        }
+    }
   }
 }
