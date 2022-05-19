@@ -10,21 +10,29 @@ pipeline{
     }
 
     stage('Attach to Cluster') {
-        dir('kubernetes') {
-            sh 'aws eks update-kubeconfig --region us-west-1 --name aline-tk'
+        steps {
+            dir('kubernetes') {
+                sh 'aws eks update-kubeconfig --region us-west-1 --name aline-tk'
+            }
         }
+        
     }
 
     stage('Update Cluster') {
-        dir('kubernetes') {
-            sh 'kubectl apply -f .'
+        steps {
+            dir('kubernetes') {
+                sh 'kubectl apply -f .'
+            }
         }
+        
     }
 
     stage('Log Deployments') {
-        dir('kubernetes') {
-            sh 'kubectl get deployments'
-        }
+        steps {
+            dir('kubernetes') {
+                sh 'kubectl get deployments'
+            }
+        } 
     }
   }
 }
