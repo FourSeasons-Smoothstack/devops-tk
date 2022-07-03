@@ -1,0 +1,22 @@
+- name: Configure Artifactory
+  hosts: artifactory
+  become: yes
+  gather_facts: false
+  tasks:
+    - name: Install Docker
+      yum:
+        name: docker
+        state: latest
+    - name: Upgrade Packages
+      yum:
+        name: '*'
+        state: latest
+    - name: Start Docker Service
+      service:
+        name: docker
+        state: started
+      become: true
+    - name: Pull Artifactory Image
+      command: 'docker pull docker.bintray.io/jfrog/artifactory-pro:latest'
+    - name: Start Artifactory Container
+      command: 'docker run --name artifactory -d -p 8081:8081 -p 8082:8082 docker.bintray.io/jfrog/artifactory-pro:latest'
